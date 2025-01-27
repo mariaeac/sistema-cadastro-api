@@ -22,5 +22,12 @@ public class FormServices {
         return formRepository.save(form);
     }
 
+    public void deleteQuestion(Long id) throws Exception {
+        if (id <= 4) {
+            throw new Exception("Não é possível apagar as 4 primeiras perguntas");
+        }
+        formRepository.deleteById(id);
+    }
+
 
 }

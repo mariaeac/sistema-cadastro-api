@@ -25,5 +25,10 @@ public class FormController {
         return formService.addNewQuestion(form);
     }
 
+    @DeleteMapping(value = "/{id}")
+    public void deleteQuestion(@PathVariable(value = "id") Long id) throws Exception {
+        formService.deleteQuestion(id);
+    }
+
 
 }
