@@ -18,7 +18,7 @@ public class FormServices {
         return formRepository.findAll();
     }
 
-    public Form addNewQuestino(Form form) {
+    public Form addNewQuestion(Form form) {
         return formRepository.save(form);
     }
 
