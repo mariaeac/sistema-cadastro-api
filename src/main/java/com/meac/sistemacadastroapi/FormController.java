@@ -30,5 +30,10 @@ public class FormController {
         formService.deleteQuestion(id);
     }
 
+    @PutMapping
+    public Form updateForm(@RequestBody Form form) {
+        return formService.updateQuestion(form);
+    }
+
 
 }

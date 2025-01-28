@@ -1,5 +1,7 @@
 package com.meac.sistemacadastroapi.service;
 
+import com.meac.sistemacadastroapi.exceptions.BadRequestException;
+import com.meac.sistemacadastroapi.exceptions.ResourceNotFoundException;
 import com.meac.sistemacadastroapi.model.Form;
 
 import com.meac.sistemacadastroapi.repositories.FormRepository;
@@ -22,11 +24,23 @@ public class FormServices {
         return formRepository.save(form);
     }
 
-    public void deleteQuestion(Long id) throws Exception {
+    public void deleteQuestion(Long id) {
         if (id <= 4) {
-            throw new Exception("Não é possível apagar as 4 primeiras perguntas");
+            throw new BadRequestException("Não é possível apagar as 4 primeiras perguntas");
         }
         formRepository.deleteById(id);
+    }
+
+    public Form updateQuestion(Form form) {
+
+        if (form.getId() <= 4) {
+            throw new BadRequestException("Não é possível alterar as quatro primeiras perguntas");
+        }
+
+       Form question = formRepository.findById(form.getId()).orElseThrow(() -> new ResourceNotFoundException("Nenhuma pergunta encontrada com esse ID"));
+       question.setQuestion(form.getQuestion());
+       formRepository.save(question);
+       return question;
     }
 
 
